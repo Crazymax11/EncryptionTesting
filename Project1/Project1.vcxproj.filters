@@ -23,5 +23,8 @@
     <ClInclude Include="RawRSATest.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="CryptoTest.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

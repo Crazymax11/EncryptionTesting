@@ -1,32 +1,25 @@
-#include <dll.h>
-#include <cryptlib.h>
+#include "CryptoTest.h"
 
 USING_NAMESPACE(CryptoPP)
+using namespace std;
 
-enum Keys
-{
-	Public = 1,
-	Private =2
-};
-
-class RawRSATest
+class RawRSATest : public CryptoTest
 {
 public:
-	RawRSATest(const int keySize)
+	RawRSATest(const int keySize) : CryptoTest()
 	{
 		_privateKey.Initialize(_rnd, keySize);
 		_publicKey = *(new RSA::PublicKey(_privateKey));
 
 		_keySize = keySize;
-
-		//ValidateKeys();
-		
 	}
+
 	~RawRSATest()
 	{
 		delete &_publicKey;
 	}
-	Integer EncryptionByKey(Keys _key, Integer& message) const
+
+	virtual Integer EncryptionByKey(Keys _key, Integer& message) 
 	{
 		   switch (_key)
 		   {
@@ -38,9 +31,9 @@ public:
 			   break;
 		   }
 		   return message;
-	}
+	};
 
-	Integer DencryptionByKey(Keys _key, Integer& message) 
+	Integer DecryptionByKey(Keys _key, Integer& message) 
 	{
 		   switch (_key)
 		   {
@@ -52,33 +45,18 @@ public:
 			   break;
 		   }
 		   return message;
-	}
+	};
+
+	void PrintInfo() const
+	{
+		cout << "this is RSA Raw on Crypto++" << endl << "Key size is " << _keySize << endl;
+	};
+
+
 private:
 
-AutoSeededRandomPool _rnd;
-RSA::PrivateKey _privateKey;
-RSA::PublicKey _publicKey;
-int _keySize;
-
-
-
-	/*
-	private bool ValidateKeys()
-	{
-		bool result = true;
-		if (!_privateKey.Validate(_rnd, _keySize))
-		{
-			throw runtime_error("Rsa private key validation failed");
-			result = false;
-		}
-
-		if (!_publicKey.Validate(_rnd, _keySize))
-		{
-			throw runtime_error("Rsa public key validation failed");
-			result = false;
-		}
-			
-		return result;
-	}
-	*/
+	AutoSeededRandomPool _rnd;
+	RSA::PrivateKey _privateKey;
+	RSA::PublicKey _publicKey;
+	int _keySize;
 };

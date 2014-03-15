@@ -23,22 +23,14 @@ int main()
 	RawRSATest Test(512);
 	//есть проблема с супердлинными сообщениями
 	string message = "mama mila ramu smert neizbejna boga net";
-	cout << "message: " << hex << message << endl;
 	Integer m = Integer((const byte *)message.data(), message.size());
-	cout << "message: " << hex << m << endl;
-	m = Test.EncryptionByKey(Public, m);
-	cout << "encrypted message: " << hex << m << endl;
-	Test.DencryptionByKey(Private, m);
-	cout << "decrypted message: " << hex << m << endl;
+	Test.PrintTest(m);
+	
 
-	size_t req = m.MinEncodedSize();
-	string recovered;
-	recovered.resize(req);
-	m.Encode((byte *)recovered.data(), recovered.size());
+	cout << "RawRSATest" << endl;
+	//10к раз шифрование
+	cout << "Encryption" << endl;
 
-	cout << "recovered: " << recovered << endl;
-
-	//assert(message == fact);
 
 
 	system("pause");
