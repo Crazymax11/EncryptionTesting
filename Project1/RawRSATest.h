@@ -49,7 +49,7 @@ public:
 
 	void PrintInfo() const
 	{
-		cout << "this is RSA Raw on Crypto++" << endl << "Key size is " << _keySize << endl;
+		cout << "this is RSA Raw on Crypto++" << endl << "Key size is " << IntToString(_keySize) << endl;
 	};
 
 
@@ -58,5 +58,5 @@ private:
 	AutoSeededRandomPool _rnd;
 	RSA::PrivateKey _privateKey;
 	RSA::PublicKey _publicKey;
-	int _keySize;
+	unsigned int _keySize;
 };
